@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.function.Function;
 
+/** Function which encapsulates logic to find most active cookie for a given date. */
 public class GetActiveCookiesByDate implements Function<Date, List<String>> {
 
   private static final SimpleDateFormat UTC_FORMAT;

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/** Log file based cookie reader. */
 public class CookieLogFileReader implements CookieLogReader {
 
   private final BufferedReader bufferedReader;

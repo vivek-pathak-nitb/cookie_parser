@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class GetActiveCookiesByDateTest {
         getActiveCookiesByDate.apply(CookieCommand.DATE_FORMAT.parse(DATE_STRING));
 
     // assert
-    assertEquals(Arrays.asList("AtY0laUfhglK3lC7", "SAZuXPGUrfbcn5UA"), activeCookies);
+    assertEquals(Collections.singletonList("AtY0laUfhglK3lC7"), activeCookies);
   }
 
   @Test

@@ -11,12 +11,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.function.Function;
 
 public class GetActiveCookiesByDate implements Function<Date, List<String>> {
 
-  private static final SimpleDateFormat UTC_FORMAT =
-      new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.ENGLISH);
+  private static final SimpleDateFormat UTC_FORMAT;
+
+  static {
+    UTC_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.ENGLISH);
+    UTC_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+  }
 
   private final CookieLogReader cookieLogReader;
 
@@ -38,8 +43,8 @@ public class GetActiveCookiesByDate implements Function<Date, List<String>> {
 
         String[] arr = line.split(",");
         Date logDate = UTC_FORMAT.parse(arr[1]);
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
+        Calendar cal1 = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        Calendar cal2 = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         cal1.setTime(logDate);
         cal2.setTime(date);
         if (isEqual(cal1, cal2)) {

@@ -6,18 +6,23 @@ import picocli.CommandLine;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /** Driver class for the command. */
 @CommandLine.Command(name = "cookieCli", description = "Performs operations on Cookie log")
 public class CookieCommand implements Runnable {
 
-  public static final SimpleDateFormat DATE_FORMAT =
-      new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+  public static final SimpleDateFormat DATE_FORMAT;
 
-  @CommandLine.Option(names = "-f", description = "Filename to process")
+  static {
+    DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+  }
+
+  @CommandLine.Option(names = "-f", description = "Filename to process", required = true)
   private String fileName;
 
-  @CommandLine.Option(names = "-d", description = "Date")
+  @CommandLine.Option(names = "-d", description = "Date", required = true)
   private String dateString;
 
   public void run() {
